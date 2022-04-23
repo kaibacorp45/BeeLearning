@@ -4,7 +4,10 @@ from flask.cli import with_appcontext, AppGroup
 
 from App.database import create_db
 from App.main import app, migrate
-from App.controllers import ( create_user, get_all_users_json, get_all_users )
+from App.controllers import ( create_user, get_all_users_json, get_all_users,addWords ) #addWords added
+from App.models import Words # Words imported
+import csv #new,change?
+from App.database import db
 
 # This commands file allow you to create convenient CLI commands
 # for testing controllers
@@ -45,6 +48,45 @@ def list_user_command(format):
 
 app.cli.add_command(user_cli) # add the group to the cli
 
+@app.cli.command("wordsdb", help="Add Words to the database")
+def add_words():
+    word_list = []
+    with open('/workspace/flaskmvc/WordsList.csv', encoding='utf-8-sig') as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+        wordB = ""
+        diff = ""
+        pos = ""
+        defin = ""
+        senten = ""
+
+        for line in csv_reader:
+            wordB = line['Word']
+            if wordB == "":
+                wordB = None
+
+            diff = line['Difficulty']
+            if diff =="":
+                diff = None
+        
+            pos = line['POS']
+            if pos == "":
+                pos = None
+            '''
+            defin = line['Definition']
+            if defin == "":
+                defin = None
+
+            senten = line['Sentence']
+            if senten =="":
+                senten = None
+            '''
+            #word_list.append(Words(word = wordB, difficulty = diff, partOfSpeech = pos, definition = defin, sentence = senten))
+            word_list.append(Words(word = wordB, difficulty = diff, partOfSpeech = pos))
+
+        for w in word_list:
+            db.session.add(w)
+            #print(w.word)
+        db.session.commit()
 
 '''
 Generic Commands

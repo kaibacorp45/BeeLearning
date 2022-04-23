@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Bee Learning{% endblock %}
+{% block page %}Bee Learning{% endblock %}
+
+{{ super() }}
+
+{% block content %}
+
+<body>
+  <div class="row">
+    <table class="col m6 offset-m3">
+      <!-- Add jinja templateing to show Namy, type1, type2, Weight and Height of user's pokemon  -->
+      <tr>
+        <th>Word</th>
+        <th>Difficulty</th>
+        <th>Part Of Speech</th>
+      </tr>
+      {% for r in word_list %} 
+        <tr>
+          <td>{{ r.word }}</td>
+          <td>{{ r.difficulty }}</td>
+          <td>{{ r.partOfSpeech }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+    
+</body>
+{% endblock %}
