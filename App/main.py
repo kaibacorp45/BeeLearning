@@ -16,12 +16,14 @@ from App.controllers import (
 
 from App.views import (
     user_views,
-    api_views
+    api_views,
+    play_views
 )
 
 views = [
     user_views,
-    api_views
+    api_views,
+    play_views
 ]
 
 def add_views(app, views):
