@@ -8,4 +8,12 @@ class Words(db.Model):
     defintion = db.Column(db.String(500), nullable = True)
     sentence = db.Column(db.String(500), nullable = True)
 
-
+    def toDict(self):
+        return{
+            'wid': self.wid,
+            'word': self.username,
+            'difficulty': self.difficulty,
+            'partOfSpeech': self.partOfSpeech,
+            'definition': self.defintion,
+            'sentence': self.sentence
+        }

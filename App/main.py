@@ -11,8 +11,8 @@ from datetime import timedelta
 from App.database import create_db, get_migrate
 
 from App.controllers import (
-    setup_jwt
-)
+    setup_jwt,
+) 
 
 from App.views import (
     user_views,
