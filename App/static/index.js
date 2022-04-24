@@ -1,8 +1,5 @@
-const f1 = require(["./wordlist"])
-
 // Init SpeechSynth API
 const synth = window.speechSynthesis;
-
 
 // DOM Elements
 const textForm = document.querySelector('form');
@@ -13,7 +10,6 @@ const rateValue = document.querySelector('#rate-value');
 const pitch = document.querySelector('#pitch');
 const pitchValue = document.querySelector('#pitch-value');
 const body = document.querySelector('body');
-const readbtn = document.querySelector('btnword');
 
 //Browser identifier
 // Firefox 1.0+
@@ -67,9 +63,9 @@ const speak = () => {
   }
   if (textInput.value !== '') {
     // Add background animation
-    //body.style.background = '#141414 url(static/giphy.gif)';
-   // body.style.backgroundRepeat = '';
-    //body.style.backgroundSize = '100% 100%';
+   // body.style.background = '#141414 url(img/wave.gif)';
+    body.style.backgroundRepeat = 'repeat-x';
+    body.style.backgroundSize = '100% 100%';
 
     // Get speak text
     const speakText = new SpeechSynthesisUtterance(textInput.value);
@@ -105,29 +101,14 @@ const speak = () => {
   }
 };
 
-
-function  getwords(){
-  var i = 0;
-  var word= f1[i];
-  i++;
-  return word;
-}
-
 // EVENT LISTENERS
 
-// Text form submit 
-//textForm.addEventListener('click', e => {
- // e.preventDefault();
- // speak();
- // textInput.blur();
-//});
-window.onload = function (){
-var newword = getwords();
-readbtn.addEventListener('click', e => {
+// Text form submit
+textForm.addEventListener('submit', e => {
   e.preventDefault();
-  speak(newword);
+  speak();
+  textInput.blur();
 });
-}
 
 // Rate value change
 rate.addEventListener('change', e => (rateValue.textContent = rate.value));
